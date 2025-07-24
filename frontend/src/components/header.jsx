@@ -1,3 +1,18 @@
+
+/**
+ * Header component for the inventory system.
+ *
+ * Displays the application name and a sticky header bar with an "Add Product" button.
+ *
+ * Props:
+ * - onAdd (function): Callback function triggered when the "+ Add Product" button is clicked.
+ *
+ * @component
+ * @example
+ * return (
+ *   <Header onAdd={() => openProductModal()} />
+ * )
+ */
 export default function Header({ onAdd }) {
     return (
       <div className="sticky top-0 z-50 backdrop-blur-md bg-white/70

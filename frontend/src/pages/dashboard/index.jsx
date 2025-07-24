@@ -18,6 +18,7 @@ export default function Dashboard() {
         status: "",
     });
 
+    // Modal states
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [productToDelete, setProductToDelete] = useState(null);
 
@@ -25,42 +26,46 @@ export default function Dashboard() {
     const [formLoading, setFormLoading] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState(null);
 
+     // Open "Add Product" modal
     const openAddProductModal = () => {
         setSelectedProduct(null);
         setFormModalOpen(true);
-      };
+    };
       
-      const openEditProductModal = (product) => {
+     // Open "Edit Product" modal with selected product
+    const openEditProductModal = (product) => {
         setSelectedProduct(product);
         setFormModalOpen(true);
-      };
+    };
       
-      const handleFormSubmit = async (formData) => {
+    // Handle form submission for adding/updating product
+    const handleFormSubmit = async (formData) => {
         setFormLoading(true);
         try {
           if (selectedProduct) {
-            // Call update API here with formData & selectedProduct.id
-            // e.g. await updateProduct(selectedProduct.id, formData);
+            // Update existing product
             await updateProduct(selectedProduct.id, formData)
             console.log("Updating product:", selectedProduct.id, formData);
-          } else {
-            // Call add API here with formData
-            // e.g. await addProduct(formData);
+          } 
+          else {
+            // Add new product
             await addProduct(formData);
             console.log("Adding new product", formData);
           }
-          // Refresh product list after success
-          // await fetchProducts again or update products state accordingly
+
+          // Close modal and refresh product list
           setFormModalOpen(false);
-        } catch (err) {
+        } 
+        catch (err) {
           console.error("Save product failed", err);
-        } finally {
+        } 
+        finally {
           setFormLoading(false);
         }
       };
 
 
-    // get products
+    // Fetch products when filters change
     useEffect( () => {
         const getProducts = async () => {
             try {
@@ -138,7 +143,7 @@ export default function Dashboard() {
     return(
         <div className="min-h-screen bg-red-50">
             {/* Header */}
-            <Header onAdd={handleAddProduct} />
+            <Header onAdd={openAddProductModal} />
 
             {/* Filter Bar */}
             <div className="bg-white shadow-md rounded-md px-7 py-4 mx-5 mt-4 flex flex-col md:flex-row md:items-center gap-4">
@@ -216,7 +221,8 @@ export default function Dashboard() {
                 </tbody>
             </table>
             </div>
-
+            
+            {/* delete confirmation popup modal */}
             <Modal isOpen={modalIsOpen} onRequestClose={closeModal} contentLabel="Confirm Delete" className="max-w-md mx-auto
               bg-white p-6 rounded-lg shadow-lg outline-none transition duration-1000 ease-in"
             overlayClassName="fixed inset-0 bg-white/30 bg-opacity-30 flex justify-center items-center">
@@ -233,15 +239,10 @@ export default function Dashboard() {
                     </button>
                 </div>
             </Modal>
-
-            <ProductFormModal
-  isOpen={formModalOpen}
-  onClose={() => setFormModalOpen(false)}
-  onSubmit={handleFormSubmit}
-  initialData={selectedProduct}
-  categories={categories}
-  loading={formLoading}
-/>
+            
+            {/* Update popup modal */}
+            <ProductFormModal isOpen={formModalOpen} onClose={() => setFormModalOpen(false)} onSubmit={handleFormSubmit}
+            initialData={selectedProduct} categories={categories} loading={formLoading} />
 
 
         </div>

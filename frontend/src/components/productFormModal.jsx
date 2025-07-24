@@ -3,6 +3,8 @@ import Modal from 'react-modal';
 
 
 export default function ProductFormModal({isOpen, onClose, onSubmit, initialData = null, categories = [], loading = false}) {
+    
+    // Local state for managing form fields
     const [formData, setFormData] = useState({
         name: "",
         description: "",
@@ -12,6 +14,7 @@ export default function ProductFormModal({isOpen, onClose, onSubmit, initialData
         status: "active",
       });
     
+       // Populate form when modal is opened with initialData
       useEffect(() => {
         if (initialData) {
           setFormData({
@@ -23,6 +26,8 @@ export default function ProductFormModal({isOpen, onClose, onSubmit, initialData
             status: initialData.status || "active",
           });
         } else {
+            
+            // Reset form if no initialData (new product)
           setFormData({
             name: "",
             description: "",
@@ -34,11 +39,13 @@ export default function ProductFormModal({isOpen, onClose, onSubmit, initialData
         }
       }, [initialData, isOpen]);
     
+       // Handle input changes for all fields
       const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
       };
     
+      // Handle form submission
       const handleSubmit = (e) => {
         e.preventDefault();
         onSubmit(formData);
@@ -49,10 +56,12 @@ export default function ProductFormModal({isOpen, onClose, onSubmit, initialData
           className="max-w-lg mx-auto mt-8 bg-white p-6 rounded-lg shadow-lg outline-none"
           overlayClassName="fixed inset-0 bg-white/30 bg-opacity-30 flex justify-center items-center" >
           
+          {/* Modal Title */}
           <h2 className="text-xl font-semibold mb-6 text-gray-800">
             {initialData ? "Update Product" : "Add New Product"}
           </h2>
     
+            {/* Product Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Name */}
             <div>
@@ -122,7 +131,7 @@ export default function ProductFormModal({isOpen, onClose, onSubmit, initialData
       
             
     
-            {/* Buttons */}
+            {/* Save Buttons */}
             <div className="flex justify-end space-x-3 mt-6">
               <button type="button" onClick={onClose} className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md 
                 hover:bg-gray-300 transition">
