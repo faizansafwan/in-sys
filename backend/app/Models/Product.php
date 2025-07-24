@@ -18,6 +18,9 @@ class Product extends Model
         'status',
     ];
 
+     /**
+     * Get the category that the product belongs to.
+     */
     public function category()
     {
         return $this->belongsTo(Category::class);
