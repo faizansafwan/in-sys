@@ -1,12 +1,52 @@
-# React + Vite
+# Frontend - In-Sys
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the **React** frontend application for the In-Sys project, built using **Vite**, **Tailwind CSS**, and **React Router**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tech Stack
 
-## Expanding the ESLint configuration
+- React 19
+- Vite (build tool & dev server)
+- Tailwind CSS (with Headless UI)
+- React Router DOM (routing)
+- Axios (HTTP client)
+- React Modal (modal dialogs)
+- React Icons (icons)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## Prerequisites
+
+- Node.js (v16 or higher recommended)
+- npm or yarn package manager
+
+---
+
+## Getting Started
+
+1. **Clone the repository**
+
+```bash
+git clone https://github.com/faizansafwan/in-sys.git
+cd in-sys/frontend
+```
+
+2. **Install dependencies**
+
+```bash
+npm install
+# or
+yarn install
+```
+
+
+3. **Install dependencies**
+
+```bash
+npm run dev
+# or
+yarn dev
+```
+
+4. **Open your browser and visit http://localhost:5173 (or the URL provided in the terminal).**
