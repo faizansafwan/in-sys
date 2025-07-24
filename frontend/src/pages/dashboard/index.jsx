@@ -95,20 +95,17 @@ export default function Dashboard() {
         getCategories();
     }, []);
 
-    const handleAddProduct = () => {
-        // Open modal or redirect to add page
-        console.log("Add product clicked");
-    };
-
-
+    // Handle search input change
     const handleSearchChange = (e) => {
         setFilters((prev) => ({ ...prev, name: e.target.value }));
     };
     
+    // Handle category filter change
     const handleCategoryChange = (e) => {
         setFilters((prev) => ({ ...prev, category: e.target.value }));
     };
     
+    // Toggle status filter
     const handleStatusToggle = () => {
         setFilters((prev) => ({
           ...prev,
@@ -116,17 +113,19 @@ export default function Dashboard() {
         }));
     };
     
-
+    // Open delete confirmation modal
     const openDeleteModal = (product) => {
         setProductToDelete(product);
         setModalIsOpen(true);
     };
-      
+     
+    // Close confirmation modal
     const closeModal = () => {
         setModalIsOpen(false);
         setProductToDelete(null);
     };
-      
+     
+    // Confirm and delete selected product
     const handleConfirmDelete = async () => {
         try {
             await deleteProduct(productToDelete.id);
@@ -174,58 +173,58 @@ export default function Dashboard() {
 
             {/* Product Table */}
             <div className="bg-white mt-6 mx-5 rounded-md shadow-md overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200 text-gray-700">
-                <thead className="bg-gray-200">
-                    <tr>
-                        <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider">ID</th>
-                        <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider">Name</th>
-                        <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider">Description</th>
-                        <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider">Price</th>
-                        <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider">Quantity</th>
-                        <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider">Category</th>
-                        <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider">Status</th>
-                        <th className="px-6 py-3 text-center text-xs font-semibold uppercase tracking-wider">Actions</th>
-                    </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-200">
-                {products.length === 0 ? (
-                    <tr>
-                        <td colSpan="8" className="text-center py-4 text-gray-500">No products found</td>
-                    </tr>
-                ) : ( products.map((product) => (
-                    <tr key={product.id}>
-                        <td className="px-6 py-4 whitespace-nowrap">{product.id}</td>
-                        <td className="px-6 py-4 whitespace-nowrap">{product.name}</td>
-                        <td className="px-6 py-4 whitespace-nowrap">{product.description}</td>
-                        <td className="px-6 py-4 whitespace-nowrap">Rs. {product.price}</td>
-                        <td className="px-6 py-4 whitespace-nowrap">{product.quantity}</td>
-                        <td className="px-6 py-4 whitespace-nowrap">{product.category?.name || "N/A"}</td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                            <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                                product.status === "active" ? "bg-green-100 text-green-800" : ""
-                            }`}>
-                                {product.status}
-                            </span>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-center space-x-4">
-                            <button className="text-gray-700 hover:text-gray-900 cursor-pointer"
-                            onClick={() => openEditProductModal(product)}>
-                                <FaEdit size={18} />
-                            </button>
-                            <button className="text-red-500 hover:text-red-700 cursor-pointer"  
-                                onClick={() => openDeleteModal(product)}><FaTrash size={18} /></button>
-                        </td>
-                    </tr>
-                    ))
-                )}
-                </tbody>
-            </table>
+                <table className="min-w-full divide-y divide-gray-200 text-gray-700">
+                    <thead className="bg-gray-200">
+                        <tr>
+                            <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider">ID</th>
+                            <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider">Name</th>
+                            <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider">Description</th>
+                            <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider">Price</th>
+                            <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider">Quantity</th>
+                            <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider">Category</th>
+                            <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider">Status</th>
+                            <th className="px-6 py-3 text-center text-xs font-semibold uppercase tracking-wider">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-200">
+                    {products.length === 0 ? (
+                        <tr>
+                            <td colSpan="8" className="text-center py-4 text-gray-500">No products found</td>
+                        </tr>
+                    ) : ( products.map((product) => (
+                        <tr key={product.id}>
+                            <td className="px-6 py-4 whitespace-nowrap">{product.id}</td>
+                            <td className="px-6 py-4 whitespace-nowrap">{product.name}</td>
+                            <td className="px-6 py-4 whitespace-nowrap">{product.description}</td>
+                            <td className="px-6 py-4 whitespace-nowrap">Rs. {product.price}</td>
+                            <td className="px-6 py-4 whitespace-nowrap">{product.quantity}</td>
+                            <td className="px-6 py-4 whitespace-nowrap">{product.category?.name || "N/A"}</td>
+                            <td className="px-6 py-4 whitespace-nowrap">
+                                <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                                    product.status === "active" ? "bg-green-100 text-green-800" : ""
+                                }`}>
+                                    {product.status}
+                                </span>
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap text-center space-x-4">
+                                <button className="text-gray-700 hover:text-gray-900 cursor-pointer"
+                                onClick={() => openEditProductModal(product)}>
+                                    <FaEdit size={18} />
+                                </button>
+                                <button className="text-red-500 hover:text-red-700 cursor-pointer"  
+                                    onClick={() => openDeleteModal(product)}><FaTrash size={18} /></button>
+                            </td>
+                        </tr>
+                        ))
+                    )}
+                    </tbody>
+                </table>
             </div>
             
             {/* delete confirmation popup modal */}
             <Modal isOpen={modalIsOpen} onRequestClose={closeModal} contentLabel="Confirm Delete" className="max-w-md mx-auto
               bg-white p-6 rounded-lg shadow-lg outline-none transition duration-1000 ease-in"
-            overlayClassName="fixed inset-0 bg-white/30 bg-opacity-30 flex justify-center items-center">
+                overlayClassName="fixed inset-0 bg-white/30 bg-opacity-30 flex justify-center items-center">
             
                 <h2 className="text-lg font-semibold mb-4 text-gray-800">Are you sure you want to delete this product?</h2>
                 <div className="flex justify-end space-x-3 mt-6">
@@ -243,7 +242,6 @@ export default function Dashboard() {
             {/* Update popup modal */}
             <ProductFormModal isOpen={formModalOpen} onClose={() => setFormModalOpen(false)} onSubmit={handleFormSubmit}
             initialData={selectedProduct} categories={categories} loading={formLoading} />
-
 
         </div>
 
