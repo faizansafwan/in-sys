@@ -22,7 +22,7 @@ export default function ProductFormModal({isOpen, onClose, onSubmit, initialData
             description: initialData.description || "",
             price: initialData.price || "",
             quantity: initialData.quantity || "",
-            category: initialData.category?.name || "",
+            category: initialData.category?.id || "",
             status: initialData.status || "active",
           });
         } else {
@@ -108,7 +108,7 @@ export default function ProductFormModal({isOpen, onClose, onSubmit, initialData
                         focus:ring-red-500">
                         <option value="">Select category</option>
                         {categories.map((cat) => (
-                        <option key={cat.id} value={cat.name}>
+                        <option key={cat.id} value={cat.id}>
                             {cat.name}
                         </option>
                         ))}

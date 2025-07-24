@@ -42,14 +42,22 @@ export default function Dashboard() {
     const handleFormSubmit = async (formData) => {
         setFormLoading(true);
         try {
+
+            // rename category to category_id
+            const payload = {
+                ...formData,
+                category_id: formData.category,
+              };
+            delete payload.category;
+
           if (selectedProduct) {
             // Update existing product
-            await updateProduct(selectedProduct.id, formData)
-            console.log("Updating product:", selectedProduct.id, formData);
+            await updateProduct(selectedProduct.id, payload)
+            console.log("Updating product:", selectedProduct.id, payload);
           } 
           else {
             // Add new product
-            await addProduct(formData);
+            await addProduct(payload);
             console.log("Adding new product", formData);
           }
 
